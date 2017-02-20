@@ -14,3 +14,4 @@ Quick start
 **2** Add "gum" to your INSTALLED_APPS settings like this::
 
     INSTALLED_APPS += ('belt',)
+

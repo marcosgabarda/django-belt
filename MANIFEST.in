@@ -1,4 +1,7 @@
 include LICENSE
 include README.rst
+include HISTORY.rst
+include package.json
+include gulpfile.babel.js
+include .babelrc
 recursive-include belt/static *
-recursive-include belt/templates *
