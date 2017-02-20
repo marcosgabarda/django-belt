@@ -1,2 +1,2 @@
-django>=1.10
+django>=1.5
 django-model-utils>=2.0

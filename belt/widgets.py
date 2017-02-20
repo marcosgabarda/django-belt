@@ -27,4 +27,3 @@ class ManyToManyListAdmin(Widget):
                 ["<ul>"] + map(lambda item: "<li>%s</li>" % self._format_item(item), selected_values) + ["</ul>"]
             )
         )
-

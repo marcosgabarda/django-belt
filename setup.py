@@ -12,8 +12,14 @@ from setuptools.command.build_py import build_py
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
     README = readme.read()
 
+with open(os.path.join(os.path.dirname(__file__), 'HISTORY.rst')) as history:
+    HISTORY = history.read().replace('.. :changelog:', '')
+
 # Allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
+# Dynamically calculate the version based on belt.VERSION.
+version = __import__('belt').get_version()
 
 
 class BuildStaticCommand(setuptools.Command):
@@ -47,12 +53,12 @@ class BuildPyCommand(build_py):
 
 setup(
     name='django-belt',
-    version='0.1',
+    version=version,
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
     description='Simple package with some utilities for Django',
-    long_description=README,
+    long_description=README + '\n\n' + HISTORY,
     url='https://github.com/marcosgabarda/django-belt',
     author='Marcos Gabarda',
     author_email='hey@marcosgabarda.com',
@@ -63,12 +69,18 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    ],
+    install_requires=[
+        'django>=1.5',
+        'django-model-utils>=2.0',
     ],
     cmdclass={
         'build_static': BuildStaticCommand,
