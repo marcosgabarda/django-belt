@@ -76,7 +76,6 @@ import {forEach, find} from 'lodash';
     }
 
     handleChange(event) {
-      // console.log(event)
       const value = event.target.options[event.target.options.selectedIndex].value;
       const text = event.target.options[event.target.options.selectedIndex].text;
       this.addValue(value);

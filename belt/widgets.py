@@ -11,7 +11,7 @@ from django.utils.safestring import mark_safe
 
 class ManyToManyListAdmin(Widget):
     class Media:
-        js = ("foreign_key_widget/dist/foreign_key_widget.js",)
+        js = ("js/foreign_key_widget.js",)
 
     @staticmethod
     def _format_item(item):

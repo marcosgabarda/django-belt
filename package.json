@@ -1,7 +1,7 @@
 {
-  "name": "foreign_key_widget",
+  "name": "belt",
   "version": "1.0.0",
-  "description": "Foerign key widget for replace django admin widget",
+  "description": "Static files for django-belt package",
   "author": { "name" : "Salvador Mari",
     "email" : "saruba@gmail.com"
   },

@@ -3,8 +3,8 @@ import babel from 'gulp-babel';
 import browserify from 'gulp-browserify';
 import uglify from 'gulp-uglify';
 
-const INPUT_FOLDER = "src/";
-const OUTPUT_FOLDER = "dist/";
+const INPUT_FOLDER = "belt/static/src/";
+const OUTPUT_FOLDER = "belt/static/js/";
 
 gulp.task('default', function () {
     return gulp.src(`${INPUT_FOLDER}*.js`)

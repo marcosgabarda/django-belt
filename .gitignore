@@ -23,6 +23,9 @@ sftp-config.json
 *.py[cod]
 __pycache__
 
+# Packaging files:
+*.egg*
+
 # Logs
 logs
 *.log
@@ -58,3 +61,11 @@ node_modules/
 # virtual environments
 .env
 
+# Javascript compiled build files
+belt/static/js/*.js
+
+# Others
+docs/_build
+build/
+dist/
+.coverage
