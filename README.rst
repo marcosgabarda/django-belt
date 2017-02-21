@@ -11,7 +11,7 @@ Quick start
 
     pip install django-belt
 
-**2** Add "gum" to your INSTALLED_APPS settings like this::
+**2** Add "belt" to your INSTALLED_APPS settings like this::
 
     INSTALLED_APPS += ('belt',)
 
