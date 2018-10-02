@@ -87,6 +87,8 @@ setup(
     name='django-belt',
     version=version,
     packages=[
+        'belt.contrib.restframework',
+        'belt.contrib',
         'belt',
     ],
     include_package_data=True,
