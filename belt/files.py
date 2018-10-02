@@ -17,10 +17,11 @@ class UploadToDir(object):
     attribute.
     """
 
-    def __init__(self, path, populate_from=None, random_name=False):
+    def __init__(self, path, populate_from=None, prefix=None, random_name=False):
         self.path = path
         self.populate_from = populate_from
         self.random_name = random_name
+        self.prefix = prefix
 
     def __call__(self, instance, filename):
         """Generates an name for an uploaded file."""
@@ -35,5 +36,7 @@ class UploadToDir(object):
                 "{}--{}".format(time.time(), random.random()).encode('utf-8')
             )
             readable_name = random_name.hexdigest()
+        elif self.prefix is not None:
+            readable_name = f'{self.prefix}{readable_name}'
         file_name = "{}.{}".format(readable_name, ext)
         return os.path.join(self.path, file_name)

@@ -2,8 +2,9 @@
   "name": "belt",
   "version": "1.0.0",
   "description": "Static files for django-belt package",
-  "author": { "name" : "Salvador Mari",
-    "email" : "saruba@gmail.com"
+  "author": {
+    "name": "Salvador Mari",
+    "email": "saruba@gmail.com"
   },
   "repository": "https://github.com/marcosgabarda/django-belt",
   "scripts": {
