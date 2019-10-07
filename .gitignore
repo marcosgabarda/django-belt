@@ -64,6 +64,9 @@ node_modules/
 # Javascript compiled build files
 belt/static/js/*.js
 
+# Visual Studio Code
+.vscode/
+
 # Others
 docs/_build
 build/
