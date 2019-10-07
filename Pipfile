@@ -15,6 +15,7 @@ pytest-django = "*"
 djangorestframework = "*"
 django-filter = "*"
 flit = "*"
+doc8 = "*"
 
 [requires]
 python_version = "3.7"
