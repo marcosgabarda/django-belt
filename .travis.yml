@@ -7,6 +7,6 @@ install:
   - pip install pipenv
   - pipenv install
 script:
-  - pytest --cov snitch
+  - pytest --cov belt
 after_success:
   - coveralls
