@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from django import get_version
+"""Django app made to get together a set of utilities to use with Django projects."""
+__version__ = "1.1.0"
 
-VERSION = (1, 0, 1, 'final', 0)
 
-__version__ = get_version(VERSION)
+default_app_config = "belt.apps.BeltConfig"
