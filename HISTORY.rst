@@ -12,6 +12,12 @@ History
 * Added ActionSerializersMixin
 * Updated UploadToDir
 
+1.0.0 (2018-10-2)
++++++++++++++++++
+
+* Updated UploadToDir with ``prefix`` param.
+* Contrib package with Django Rest Framework utils.
+
 1.0a2 (2017-2-21)
 +++++++++++++++++
 
