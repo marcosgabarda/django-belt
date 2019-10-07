@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, print_function, division, absolute_import
-
 import hashlib
 import os
 import random
@@ -17,23 +14,28 @@ class UploadToDir(object):
     attribute.
     """
 
-    def __init__(self, path, populate_from=None, random_name=False):
+    def __init__(self, path, populate_from=None, prefix=None, random_name=False):
         self.path = path
         self.populate_from = populate_from
         self.random_name = random_name
+        self.prefix = prefix
 
     def __call__(self, instance, filename):
         """Generates an name for an uploaded file."""
         if self.populate_from is not None and not hasattr(instance, self.populate_from):
-            raise AttributeError("Instance hasn't {} attribute".format(self.populate_from))
-        ext = filename.split('.')[-1]
-        readable_name = slugify(filename.split('.')[0])
+            raise AttributeError(
+                "Instance hasn't {} attribute".format(self.populate_from)
+            )
+        ext = filename.split(".")[-1]
+        readable_name = slugify(filename.split(".")[0])
         if self.populate_from:
             readable_name = slugify(getattr(instance, self.populate_from))
         if self.random_name:
             random_name = hashlib.sha256(
-                "{}--{}".format(time.time(), random.random()).encode('utf-8')
+                "{}--{}".format(time.time(), random.random()).encode("utf-8")
             )
             readable_name = random_name.hexdigest()
+        elif self.prefix is not None:
+            readable_name = f"{self.prefix}{readable_name}"
         file_name = "{}.{}".format(readable_name, ext)
         return os.path.join(self.path, file_name)
