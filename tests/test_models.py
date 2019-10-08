@@ -7,7 +7,6 @@ from tests.factories import PostFactory, CategoryFactory
 
 
 class ModelTest(TestCase):
-
     def test_check_allowed_transitions(self):
         post = PostFactory()
         self.assertEqual(DRAFT, post.status)
