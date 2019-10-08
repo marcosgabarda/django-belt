@@ -13,6 +13,5 @@ class PostFactory(DjangoModelFactory):
 
 
 class CategoryFactory(DjangoModelFactory):
-
     class Meta:
         model = Category
