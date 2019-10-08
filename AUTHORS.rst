@@ -10,4 +10,5 @@ Development Lead
 Contributors
 ------------
 
-* Salvador Marí <saruba@gmail.com>
+* Salvador Marí <@saruba>
+* Iván Martín <@seik>

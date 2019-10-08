@@ -3,6 +3,12 @@
 History
 -------
 
+1.2.0 (2019-10-8)
++++++++++++++++++
+
+* Added SimpleSerializationMixin
+* Added SimplePaginationMixin
+
 1.1.0 (2019-10-7)
 +++++++++++++++++
 
