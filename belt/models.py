@@ -1,6 +1,25 @@
+import warnings
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+
+def transition_handler_decorator(func):
+    """Decorator for transitions methods. Allows to activate a flag if the
+    transition is running, and also saves the original status value.
+    """
+    if not func:
+        return func
+
+    def _transition_wrapper(self=None, *args, **kwargs):
+        self._original_status = self.get_status_transition()[0]
+        self._handling_transition = True
+        result = func(*args, **kwargs)
+        self._handling_transition = False
+        return result
+
+    return _transition_wrapper
 
 
 class StatusMixin(models.Model):
@@ -13,6 +32,12 @@ class StatusMixin(models.Model):
 
     class Meta:
         abstract = True
+
+    def __init__(self, *args, **kwargs):
+        """Init _handling_transition value to False."""
+        self._handling_transition = False
+        super().__init__(*args, **kwargs)
+        self._original_status = getattr(self, self.STATUS_FIELD)
 
     def refresh_from_db(self, using=None, fields=None):
         super().refresh_from_db(using=using, fields=fields)
@@ -70,19 +95,32 @@ class StatusMixin(models.Model):
         transition = self.get_status_transition()
         if transition:
             handler_name = self.TRANSITION_HANDLERS.get(transition, "")
-            return getattr(self, handler_name) if hasattr(self, handler_name) else None
+            transition_handler = (
+                getattr(self, handler_name) if hasattr(self, handler_name) else None
+            )
+            return transition_handler_decorator(transition_handler)
 
     def clean(self):
         """Validates transition in clean."""
         self.validate_transition()
 
     def save(self, *args, **kwargs):
+        # Checks if the is a transition during a handling
+        if self._handling_transition and self._original_status != getattr(
+            self, self.STATUS_FIELD
+        ):
+            setattr(self, self.STATUS_FIELD, self._original_status)
+            warnings.warn(
+                Warning(
+                    "Status changes during the execution of transitions handlers are not allowed"
+                )
+            )
         # Gets the handler before the save
         transition = self.get_status_transition()
         transition_handler = self.get_transition_handler()
         super().save(*args, **kwargs)
         # Executes the handler after the save
-        if transition_handler:
+        if transition_handler and not self._handling_transition:
             self.pre_status_handler(transition)
-            transition_handler()
+            transition_handler(self)
             self.post_status_handler(transition)

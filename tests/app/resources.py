@@ -23,6 +23,4 @@ class PostViewSet(ActionSerializersMixin, viewsets.ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = (AllowAny,)
     filterset_class = PostFilter
-    action_serializers = {
-        "retrieve": PostDetailSerializer
-    }
+    action_serializers = {"retrieve": PostDetailSerializer}

@@ -4,7 +4,6 @@ from tests.factories import PostFactory
 
 
 class PostAPITestCase(APITestCase):
-
     def test_list_serializer(self):
         PostFactory.create_batch(size=10)
         self.get("api_v1:post-list")

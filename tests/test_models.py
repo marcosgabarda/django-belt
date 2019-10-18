@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from tests.app.constants import DRAFT, PUBLISHED
+from tests.app.constants import DRAFT, PUBLISHED, DUMMY, AUTO
 from tests.app.models import Post, Category
 from tests.factories import PostFactory, CategoryFactory
 
@@ -13,6 +13,29 @@ class ModelTest(TestCase):
         exception = None
         try:
             post.status = PUBLISHED
+            post.save()
+        except ValidationError as validation_exception:
+            exception = validation_exception
+        self.assertIsNone(exception)
+
+    def test_check_status_change_on_transition(self):
+        post = PostFactory()
+        self.assertEqual(DRAFT, post.status)
+        exception = None
+        try:
+            post.status = AUTO
+            post.save()
+        except ValidationError as validation_exception:
+            exception = validation_exception
+        self.assertIsNone(exception)
+        self.assertEqual(DRAFT, post.status)
+
+    def test_check_no_handler_on_transition(self):
+        post = PostFactory()
+        self.assertEqual(DRAFT, post.status)
+        exception = None
+        try:
+            post.status = DUMMY
             post.save()
         except ValidationError as validation_exception:
             exception = validation_exception
