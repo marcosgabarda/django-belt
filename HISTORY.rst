@@ -3,6 +3,13 @@
 History
 -------
 
+1.3.0 (2019-10-18)
++++++++++++++++++
+
+* Added simple validation mixin
+* Fixed recursion problem when save in transitions handlers
+* Avoid status changes in transitions
+
 1.2.0 (2019-10-8)
 +++++++++++++++++
 
