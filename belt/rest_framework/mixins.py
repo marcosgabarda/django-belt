@@ -43,3 +43,14 @@ class SimplePaginationMixin:
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class SimpleValidationMixin:
+    """
+    Mixin to simplify validation.
+    """
+
+    def validate(self, data: dict, raise_exception=True) -> Serializer:
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=raise_exception)
+        return serializer
