@@ -13,7 +13,7 @@ def transition_handler_decorator(func):
         return func
 
     def _transition_wrapper(self=None, *args, **kwargs):
-        self._original_status = self.get_status_transition()[0]
+        self._original_status = getattr(self, self.STATUS_FIELD)
         self._handling_transition = True
         result = func(*args, **kwargs)
         self._handling_transition = False
