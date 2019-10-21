@@ -3,6 +3,11 @@
 History
 -------
 
+1.3.1 (2019-10-21)
++++++++++++++++++
+
+* Fixed error in update status inside a handler
+
 1.3.0 (2019-10-18)
 +++++++++++++++++
 
