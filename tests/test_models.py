@@ -28,7 +28,7 @@ class ModelTest(TestCase):
         except ValidationError as validation_exception:
             exception = validation_exception
         self.assertIsNone(exception)
-        self.assertEqual(DRAFT, post.status)
+        self.assertEqual(AUTO, post.status, "status doesn't change to published")
 
     def test_check_no_handler_on_transition(self):
         post = PostFactory()
