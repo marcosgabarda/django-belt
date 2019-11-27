@@ -8,7 +8,7 @@ from tests.factories import PostFactory, CategoryFactory
 
 class ModelTest(TestCase):
     def test_check_allowed_transitions(self):
-        post = PostFactory()
+        post: Post = PostFactory()
         self.assertEqual(DRAFT, post.status)
         exception = None
         try:
@@ -42,7 +42,7 @@ class ModelTest(TestCase):
         self.assertIsNone(exception)
 
     def test_check_forbidden_transitions(self):
-        post = PostFactory(status=PUBLISHED)
+        post: Post = PostFactory(status=PUBLISHED)
         self.assertEqual(PUBLISHED, post.status)
         exception = None
         try:
@@ -63,3 +63,17 @@ class ModelTest(TestCase):
         CategoryFactory.create_batch(size=10)
         categories = Category.objects.search(query="foo")
         self.assertEqual(0, categories.count())
+
+    def test_logic_delete(self):
+        post: Post = PostFactory()
+        post.logic_delete()
+        self.assertTrue(post.deleted)
+        self.assertIsNotNone(post.date_deleted)
+
+    def test_undo_logic_delete(self):
+        post: Post = PostFactory()
+        post.logic_delete()
+        self.assertTrue(post.deleted)
+        post.undo_logic_delete()
+        self.assertFalse(post.deleted)
+        self.assertIsNone(post.date_deleted)
