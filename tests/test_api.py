@@ -1,7 +1,7 @@
 from test_plus import APITestCase
 
 from tests.app.constants import PUBLISHED, DRAFT
-from tests.factories import PostFactory
+from tests.factories import BlogFactory, PostFactory
 
 
 class PostAPITestCase(APITestCase):
@@ -34,3 +34,20 @@ class PostAPITestCase(APITestCase):
         self.response_200()
         post.refresh_from_db()
         self.assertEqual(PUBLISHED, post.status)
+
+
+class BlogAPITestCase(APITestCase):
+    def test_list_serializer(self):
+        BlogFactory.create_batch(size=10)
+        self.get("api_v1:blog-list")
+        self.response_200()
+        data = self.last_response.json()
+        self.assertEqual(10, len(data))
+        self.assertNotIn("content", data[0])
+
+    def test_annotate_total_posts(self):
+        blog = BlogFactory()
+        PostFactory.create_batch(blog=blog, size=10)
+        self.get("api_v1:blog-detail", pk=blog.pk)
+        self.response_200()
+        self.assertEquals(10, self.last_response.data["total_posts"])

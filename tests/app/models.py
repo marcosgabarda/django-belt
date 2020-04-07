@@ -4,10 +4,16 @@ from django.utils import timezone
 from belt.models import StatusMixin
 from belt.models import StatusMixin, LogicDeleteMixin
 from tests.app.constants import STATUS_OPTIONS, DRAFT, PUBLISHED, DUMMY, AUTO
-from tests.app.managers import PostQuerySet, CategoryQuerySet
+from tests.app.managers import PostQuerySet, CategoryQuerySet, BlogQuerySet
+
+
+class Blog(models.Model):
+    objects = BlogQuerySet.as_manager()
 
 
 class Post(StatusMixin, LogicDeleteMixin, models.Model):
+    blog = models.ForeignKey(Blog, related_name="posts", on_delete=models.CASCADE)
+
     title = models.CharField(max_length=250)
     content = models.TextField()
     status = models.CharField(max_length=16, choices=STATUS_OPTIONS, default=DRAFT)

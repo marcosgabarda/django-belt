@@ -1,10 +1,17 @@
 from factory import DjangoModelFactory
 from factory.fuzzy import FuzzyText
 
-from tests.app.models import Post, Category
+from tests.app.models import Post, Category, Blog
+from factory.declarations import SubFactory
+
+
+class BlogFactory(DjangoModelFactory):
+    class Meta:
+        model = Blog
 
 
 class PostFactory(DjangoModelFactory):
+    blog = SubFactory(BlogFactory)
     title = FuzzyText()
     content = FuzzyText()
 
