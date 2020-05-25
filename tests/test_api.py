@@ -50,4 +50,4 @@ class BlogAPITestCase(APITestCase):
         PostFactory.create_batch(blog=blog, size=10)
         self.get("api_v1:blog-detail", pk=blog.pk)
         self.response_200()
-        self.assertEquals(10, self.last_response.data["total_posts"])
+        self.assertEqual(10, self.last_response.data["total_posts"])
