@@ -2,8 +2,8 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from tests.app.constants import DRAFT, PUBLISHED, DUMMY, AUTO
-from tests.app.models import Post, Category
-from tests.factories import PostFactory, CategoryFactory
+from tests.app.models import Blog, Category, Post
+from tests.factories import BlogFactory, CategoryFactory, PostFactory
 
 
 class ModelTest(TestCase):
@@ -77,3 +77,9 @@ class ModelTest(TestCase):
         post.undo_logic_delete()
         self.assertFalse(post.deleted)
         self.assertIsNone(post.date_deleted)
+
+    def test_annotate_total_posts(self):
+        blog = BlogFactory()
+        PostFactory.create_batch(blog=blog, size=10)
+        annotated_blog = Blog.objects.annotate_total_posts().first()
+        self.assertEqual(10, annotated_blog.total_posts)
