@@ -72,3 +72,4 @@ docs/_build
 build/
 dist/
 .coverage
+.pytest_cache/
