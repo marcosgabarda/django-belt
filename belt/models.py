@@ -2,7 +2,45 @@ import warnings
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+
+
+class LogicDeleteMixin(models.Model):
+    """Mixin to handle basic functionality of a logic delete"""
+    deleted = models.BooleanField(default=False)
+    date_deleted = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def pre_logic_delete(self):
+        pass
+
+    def post_logic_delete(self):
+        pass
+
+    def pre_undo_logic_delete(self):
+        pass
+
+    def post_undo_logic_delete(self):
+        pass
+
+    def logic_delete(self):
+        """Performs a logic delete for the object."""
+        self.pre_logic_delete()
+        self.deleted = True
+        self.date_deleted = timezone.now()
+        self.save()
+        self.post_logic_delete()
+
+    def undo_logic_delete(self):
+        """Undoes the logic delete."""
+        self.pre_undo_logic_delete()
+        self.deleted = False
+        self.date_deleted = None
+        self.save()
+        self.post_undo_logic_delete()
 
 
 def transition_handler_decorator(func):

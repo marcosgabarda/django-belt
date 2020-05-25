@@ -2,11 +2,18 @@ from django.db import models
 from django.utils import timezone
 
 from belt.models import StatusMixin
+from belt.models import StatusMixin, LogicDeleteMixin
 from tests.app.constants import STATUS_OPTIONS, DRAFT, PUBLISHED, DUMMY, AUTO
-from tests.app.managers import PostQuerySet, CategoryQuerySet
+from tests.app.managers import PostQuerySet, CategoryQuerySet, BlogQuerySet
 
 
-class Post(StatusMixin, models.Model):
+class Blog(models.Model):
+    objects = BlogQuerySet.as_manager()
+
+
+class Post(StatusMixin, LogicDeleteMixin, models.Model):
+    blog = models.ForeignKey(Blog, related_name="posts", on_delete=models.CASCADE)
+
     title = models.CharField(max_length=250)
     content = models.TextField()
     status = models.CharField(max_length=16, choices=STATUS_OPTIONS, default=DRAFT)
@@ -19,6 +26,18 @@ class Post(StatusMixin, models.Model):
     FORBIDDEN_TRANSITIONS = [(PUBLISHED, DRAFT)]
 
     TRANSITION_HANDLERS = {(DRAFT, PUBLISHED): "published", (DRAFT, AUTO): "auto"}
+
+    def pre_logic_delete(self):
+        pass
+
+    def post_logic_delete(self):
+        pass
+
+    def pre_undo_logic_delete(self):
+        pass
+
+    def post_undo_logic_delete(self):
+        pass
 
     def published(self):
         self.published_at = timezone.now()
