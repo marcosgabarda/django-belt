@@ -1,7 +1,7 @@
 from django.db import models
+from django.db.models import Count
 
 from belt.managers import SearchQuerySetMixin
-from django.db.models import Count
 
 
 class PostQuerySet(SearchQuerySetMixin, models.QuerySet):

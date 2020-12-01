@@ -1,8 +1,8 @@
 from factory import DjangoModelFactory
+from factory.declarations import SubFactory
 from factory.fuzzy import FuzzyText
 
-from tests.app.models import Post, Category, Blog
-from factory.declarations import SubFactory
+from tests.app.models import Blog, Category, Post
 
 
 class BlogFactory(DjangoModelFactory):

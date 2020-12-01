@@ -1,6 +1,6 @@
 from test_plus import APITestCase
 
-from tests.app.constants import PUBLISHED, DRAFT
+from tests.app.constants import DRAFT, PUBLISHED
 from tests.factories import BlogFactory, PostFactory
 
 

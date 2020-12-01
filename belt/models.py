@@ -1,13 +1,15 @@
 import warnings
+from typing import Dict, List, Optional, Tuple
 
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class LogicDeleteMixin(models.Model):
     """Mixin to handle basic functionality of a logic delete"""
+
     deleted = models.BooleanField(default=False)
     date_deleted = models.DateTimeField(null=True, blank=True)
 
@@ -63,17 +65,17 @@ def transition_handler_decorator(func):
 class StatusMixin(models.Model):
     """Mixin to handle status changes"""
 
-    STATUS_FIELD = "status"
-    ALLOWED_TRANSITIONS = []
-    FORBIDDEN_TRANSITIONS = []
-    TRANSITION_HANDLERS = {}
+    STATUS_FIELD: str = "status"
+    ALLOWED_TRANSITIONS: List[Tuple[str, str]] = []
+    FORBIDDEN_TRANSITIONS: List[Tuple[str, str]] = []
+    TRANSITION_HANDLERS: Dict[Tuple[str, str], str] = {}
 
     class Meta:
         abstract = True
 
     def __init__(self, *args, **kwargs):
         """Init _handling_transition value to False."""
-        self._handling_transition = False
+        self._handling_transition: bool = False
         super().__init__(*args, **kwargs)
         self._original_status = getattr(self, self.STATUS_FIELD)
 
@@ -82,15 +84,19 @@ class StatusMixin(models.Model):
         if hasattr(self, "_transition"):
             delattr(self, "_transition")
 
-    def get_status_transition(self):
+    def get_status_transition(self) -> Optional[Tuple[str, str]]:
         """Get status transition."""
         if self.pk:
             if hasattr(self, "_transition"):
                 return self._transition
             previous = self._meta.model.objects.get(pk=self.pk)
             if previous.status != getattr(self, self.STATUS_FIELD):
-                self._transition = previous.status, getattr(self, self.STATUS_FIELD)
+                self._transition: Tuple[str, str] = (
+                    previous.status,
+                    getattr(self, self.STATUS_FIELD),
+                )
                 return self._transition
+        return None
 
     def validate_transition(self):
         """Validates the transition."""
@@ -120,11 +126,11 @@ class StatusMixin(models.Model):
                 )
             )
 
-    def pre_status_handler(self, transition):
+    def pre_status_handler(self, transition: Tuple[str, str]):
         """Method used to execute code before the status handler is called."""
         pass
 
-    def post_status_handler(self, transition):
+    def post_status_handler(self, transition: Tuple[str, str]):
         """Method used to execute code after the status handler is called."""
         pass
 

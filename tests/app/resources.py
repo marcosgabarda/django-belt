@@ -1,10 +1,10 @@
-from rest_framework import viewsets, serializers
+from rest_framework import serializers, viewsets
 from rest_framework.permissions import AllowAny
 
 from belt.rest_framework.mixins import ActionSerializersMixin
+from belt.rest_framework.serializers import AnnotatedField
 from tests.app.filters import PostFilter
 from tests.app.models import Blog, Post
-from belt.rest_framework.serializers import AnnotatedField
 
 
 class PostSerializer(serializers.ModelSerializer):

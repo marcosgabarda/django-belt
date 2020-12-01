@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from tests.app.constants import DRAFT, PUBLISHED, DUMMY, AUTO
+from tests.app.constants import AUTO, DRAFT, DUMMY, PUBLISHED
 from tests.app.models import Blog, Category, Post
 from tests.factories import BlogFactory, CategoryFactory, PostFactory
 
