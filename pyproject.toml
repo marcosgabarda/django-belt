@@ -5,7 +5,7 @@ description = "Simple package with some utilities for Django."
 readme = "README.rst"
 authors = ["Marcos Gabarda <hey@marcosgabarda.com>"]
 license = "MIT"
-homepage = "https://github.com/marcosgabarda/django-snitch"
+homepage = "https://github.com/marcosgabarda/django-belt"
 packages = [
     { include = "belt" },
 ]
