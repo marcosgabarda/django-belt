@@ -9,7 +9,7 @@ def unique_model_random_string(
     length=16,
     allowed_chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
 ):
-    """ Generates a random alphanumeric string, unique in code field from a django
+    """Generates a random alphanumeric string, unique in code field from a django
     class model
 
     :param length: Length of the generated string.

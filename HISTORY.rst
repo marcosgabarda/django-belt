@@ -3,6 +3,18 @@
 History
 -------
 
+1.6.0 (2020-12-1)
++++++++++++++++++
+
+* Feat: Added ExporterModel and ImporterModel
+
+1.5.0 (2020-12-1)
++++++++++++++++++
+
+* Added UnaccentSearchFilter
+* Migration to poetry
+* Some minor fixes
+
 1.4.0 (2020-05-25)
 +++++++++++++++++
 
