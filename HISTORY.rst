@@ -3,6 +3,11 @@
 History
 -------
 
+1.6.0 (2020-12-1)
++++++++++++++++++
+
+* Feat: Added ExporterModel and ImporterModel
+
 1.5.0 (2020-12-1)
 +++++++++++++++++
 
