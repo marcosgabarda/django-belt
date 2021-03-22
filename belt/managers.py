@@ -39,5 +39,5 @@ class SearchQuerySetMixin:
             for field in fields + list(combined_fields.keys())
         ]
         if conditions:
-            return queryset.filter(reduce(lambda x, y: x | y, conditions))
+            return queryset.filter(reduce(lambda x, y: x | y, conditions)).distinct()
         return self.none()  # type: ignore

@@ -3,6 +3,13 @@
 History
 -------
 
+
+1.7.0 (2021-3-22)
++++++++++++++++++
+
+* Feat: Added SEARCH_COMBINED_FIELDS to SearchQuerySetMixin
+* Fix: SearchQuerySetMixin for nested search
+
 1.6.0 (2020-12-1)
 +++++++++++++++++
 
