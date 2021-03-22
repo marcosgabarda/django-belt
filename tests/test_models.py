@@ -59,6 +59,12 @@ class ModelTest(TestCase):
         posts = Post.objects.search(query="exact")
         self.assertEqual(1, posts.count())
 
+    def test_search_combined(self):
+        PostFactory.create_batch(size=10)
+        PostFactory(title="title and", content="content")
+        posts = Post.objects.search(query="and content")
+        self.assertEqual(1, posts.count())
+
     def test_search_mixin_no_search_fules(self):
         CategoryFactory.create_batch(size=10)
         categories = Category.objects.search(query="foo")
