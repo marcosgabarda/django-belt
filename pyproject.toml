@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-belt"
-version = "1.7.0"
+version = "1.7.1"
 description = "Simple package with some utilities for Django."
 readme = "README.rst"
 authors = ["Marcos Gabarda <hey@marcosgabarda.com>"]

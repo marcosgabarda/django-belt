@@ -13,6 +13,8 @@ class SearchQuerySetMixin:
 
     def search(self, query: str) -> "QuerySet":
         """Search over the fields defined in the model."""
+        if not query:
+            return self  # Ignore the search if it's an empty sting
         try:
             fields: List[
                 Union[Tuple[str, str], str]
