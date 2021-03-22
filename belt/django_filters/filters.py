@@ -7,7 +7,7 @@ class SearchFilter(CharFilter):
     """Filter to use searches QuerySet method."""
 
     def filter(self, qs, value):
-        if hasattr(qs, "search"):
+        if hasattr(qs, "search") and value:
             return qs.search(query=value)
         return qs
 
