@@ -14,5 +14,5 @@ class SearchQuerySetMixin:
             fields = []
         conditions = [Q(**{f"{field}__icontains": query}) for field in fields]
         if conditions:
-            return self.filter(reduce(lambda x, y: x | y, conditions))
+            return self.filter(reduce(lambda x, y: x | y, conditions)).distinct()
         return self.none()
