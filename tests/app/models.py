@@ -21,6 +21,8 @@ class Post(StatusMixin, LogicDeleteMixin, models.Model):  # type: ignore
     objects = PostQuerySet.as_manager()
 
     SEARCH_FIELDS = ["title", "content"]
+    SEARCH_COMBINED_FIELDS = {"text": ["title", "content"]}
+
     ALLOWED_TRANSITIONS = [(DRAFT, PUBLISHED), (DRAFT, AUTO), (DRAFT, DUMMY)]
     FORBIDDEN_TRANSITIONS = [(PUBLISHED, DRAFT)]
 
