@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-belt"
-version = "1.7.1"
+version = "1.8.0"
 description = "Simple package with some utilities for Django."
 readme = "README.rst"
 authors = ["Marcos Gabarda <hey@marcosgabarda.com>"]
@@ -21,7 +21,7 @@ python = "^3.7"
 django = "^3.0.7"
 django-model-utils = "^4.1.0"
 djangorestframework = "^3.12.2"
-django-filter = "^2.4.0"
+django-filter = "^21.1"
 
 
 [tool.poetry.dev-dependencies]
