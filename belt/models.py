@@ -175,7 +175,6 @@ class StatusMixin(models.Model):
 
 
 class ExporterModel(models.Model):
-
     IDLE, RUNNING, FINISHED, ERROR = 0, 1, 2, 3
     STATUSES = (
         (IDLE, _("Idle")),

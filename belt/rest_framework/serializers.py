@@ -1,4 +1,4 @@
-from rest_framework.fields import Field, SerializerMethodField
+from rest_framework.fields import Field
 
 
 class AnnotatedField(Field):

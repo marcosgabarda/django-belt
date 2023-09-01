@@ -1,4 +1,4 @@
-from factory import DjangoModelFactory
+from factory.django import DjangoModelFactory
 from factory.declarations import SubFactory
 from factory.fuzzy import FuzzyText
 
