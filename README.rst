@@ -4,8 +4,8 @@ Django Belt
 
 Simple package with some utilities for Django.
 
-.. image:: https://img.shields.io/pypi/v/django-snitch
-    :target: https://pypi.org/project/django-snitch/
+.. image:: https://img.shields.io/pypi/v/django-belt
+    :target: https://pypi.org/project/django-belt/
     :alt: PyPI
 
 .. image:: https://coveralls.io/repos/github/marcosgabarda/django-belt/badge.svg?branch=master
