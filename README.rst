@@ -8,8 +8,8 @@ Simple package with some utilities for Django.
     :target: https://pypi.org/project/django-belt/
     :alt: PyPI
 
-.. image:: https://coveralls.io/repos/github/marcosgabarda/django-belt/badge.svg?branch=master
-    :target: https://coveralls.io/github/marcosgabarda/django-belt?branch=master
+.. image:: https://coveralls.io/repos/github/marcosgabarda/django-belt/badge.svg?branch=main
+    :target: https://coveralls.io/github/marcosgabarda/django-belt?branch=main
 
 .. image:: https://img.shields.io/badge/code_style-black-000000.svg
     :target: https://github.com/ambv/black
